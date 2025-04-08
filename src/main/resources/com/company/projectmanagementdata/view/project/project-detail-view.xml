@@ -9,6 +9,7 @@
                 <property name="manager" fetchPlan="_instance_name"/>
                 <property name="participants" fetchPlan="_base"/>
                 <property name="tasks" fetchPlan="_base"/>
+                <property name="owner" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="projectDl"/>
             <collection id="participantsDc" property="participants"/>
@@ -39,6 +40,12 @@
             </entityPicker>
             <select id="statusField" property="status"/>
             <textField id="labelsField" property="labels" readOnly="true"/>
+            <entityPicker id="ownerField" property="owner">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
         </formLayout>
         <hbox id="participantsButtonsPanel" classNames="buttons-panel">
             <button action="participantsDataGrid.addAction"/>
@@ -86,6 +93,8 @@
         <hbox id="detailActions">
             <button id="saveAndCloseButton" action="saveAction"/>
             <button id="closeButton" action="closeAction"/>
+            <button id="commitWithBeanValidationButton" text="msg://commitWithBeanValidation.text"/>
+            <button id="performBeanValidationButton" text="msg://performBeanValidationButton.text"/>
         </hbox>
     </layout>
 </view>

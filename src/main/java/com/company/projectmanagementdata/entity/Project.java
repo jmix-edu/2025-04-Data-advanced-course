@@ -1,12 +1,13 @@
 package com.company.projectmanagementdata.entity;
 
 import com.company.projectmanagementdata.datatype.ProjectLabels;
+import com.company.projectmanagementdata.validation.labels.ProjectLabelsSize;
+import com.company.projectmanagementdata.validation.validDates.ValidDatesProject;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.metamodel.annotation.Composition;
-import io.jmix.core.metamodel.annotation.InstanceName;
-import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.entity.annotation.SystemLevel;
+import io.jmix.core.metamodel.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -22,6 +23,7 @@ import java.util.UUID;
         @UniqueConstraint(name = "IDX_PROJECT_UNQ_NAME", columnNames = {"NAME"})
 })
 @Entity
+@ValidDatesProject
 public class Project {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
@@ -58,7 +60,8 @@ public class Project {
     private List<Task> tasks;
 
     //    @PropertyDatatype("projectLabels")
-//    @Convert(converter = ProjectLabelsConverter.class)
+    //    @Convert(converter = ProjectLabelsConverter.class)
+    @ProjectLabelsSize(min = 3, max = 5)
     @Column(name = "LABELS")
     private ProjectLabels labels;
 
@@ -69,6 +72,42 @@ public class Project {
     @DeletedDate
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
+
+    @Column(name = "TOTAL_ESTIMATED_EFFORTS")
+    private Integer totalEstimatedEfforts;
+
+    @SystemLevel
+    @Column(name = "OWNER_ID")
+    private UUID ownerId;
+
+    @DependsOnProperties({"ownerId"})
+    @JmixProperty
+    @Transient
+    private Customer owner;
+
+    public Customer getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Customer owner) {
+        this.owner = owner;
+    }
+
+    public UUID getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public Integer getTotalEstimatedEfforts() {
+        return totalEstimatedEfforts;
+    }
+
+    public void setTotalEstimatedEfforts(Integer totalEstimatedEfforts) {
+        this.totalEstimatedEfforts = totalEstimatedEfforts;
+    }
 
     public OffsetDateTime getDeletedDate() {
         return deletedDate;

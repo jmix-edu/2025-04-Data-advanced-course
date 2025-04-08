@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/flowui/menu">
 
-    <menu id="application" title="msg://com.company.projectmanagementdata/menu.application.title" opened="true">
+    <menu opened="true" id="application" title="msg://com.company.projectmanagementdata/menu.application.title">
         <item view="User.list" title="msg://com.company.projectmanagementdata.view.user/UserListView.title"/>
         <item view="Project.list" title="msg://com.company.projectmanagementdata.view.project/projectListView.title"/>
         <item view="Task_.list" title="msg://com.company.projectmanagementdata.view.task/taskListView.title"/>
@@ -11,5 +11,13 @@
               title="msg://com.company.projectmanagementdata.view.projectstats/projectStatsView.title"/>
         <item view="WorkloadView" title="msg://com.company.projectmanagementdata.view.workload/workloadView.title"/>
     </menu>
-
+    <menu opened="true" id="customers"
+          description="msg://com.company.projectmanagementdata/menu_config.customers.description"
+          title="msg://com.company.projectmanagementdata/menu_config.customers.title">
+        <item view="Customer.list"
+              title="msg://com.company.projectmanagementdata.view.customer/customerListView.title"/>
+        <item view="Order_.list" title="msg://com.company.projectmanagementdata.view.order/orderListView.title"/>
+        <item view="CustomSearchView"
+              title="msg://com.company.projectmanagementdata.view.customsearch/customSearchView.title"/>
+    </menu>
 </menu-config>

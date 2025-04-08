@@ -8,6 +8,7 @@
                     class="com.company.projectmanagementdata.entity.Project">
             <fetchPlan extends="_base">
                 <property name="manager" fetchPlan="_instance_name"/>
+                <property name="owner" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="projectsDl" readOnly="true">
                 <query>
@@ -36,6 +37,7 @@
             <button id="createButton" action="projectsDataGrid.create"/>
             <button id="editButton" action="projectsDataGrid.edit"/>
             <button id="removeButton" action="projectsDataGrid.remove"/>
+            <button id="dmCreate" text="msg://dmCreate"/>
             <simplePagination id="pagination" dataLoader="projectsDl"/>
         </hbox>
         <dataGrid id="projectsDataGrid"
@@ -55,6 +57,8 @@
                 <column property="manager"/>
                 <column property="status"/>
                 <column property="labels"/>
+                <column property="totalEstimatedEfforts"/>
+                <column property="owner"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
